@@ -1,4 +1,4 @@
-# agente de estudos RAG
+# Agente de estudos RAG
 
 Uma aplicação full-stack de estudos baseada em **Retrieval-Augmented Generation (RAG)**. Usuários podem enviar materiais em PDF, consultar uma base vetorial e receber respostas fundamentadas nos trechos recuperados, com as fontes utilizadas.
 
@@ -35,58 +35,7 @@ FastAPI (API RAG)
 
 **Infraestrutura:** Docker Compose, Qdrant local e Render.
 
-## Executar localmente
 
-### 1. Backend
-
-Na raiz do projeto, crie o arquivo de configuração e informe suas credenciais:
-
-```bash
-cp .env.example .env
-```
-
-No Windows PowerShell, use `Copy-Item .env.example .env`. Em seguida, preencha `OPENAI_API_KEY`, `QDRANT_URL` e `QDRANT_API_KEY` no `.env`.
-
-Instale as dependências e inicie a API:
-
-```bash
-python -m pip install -r requirements.txt
-uvicorn app.api.main:app --reload
-```
-
-A documentação interativa estará em `http://127.0.0.1:8000/docs`.
-
-### 2. Frontend
-
-Em outro terminal:
-
-```bash
-cd frontend
-cp .env.example .env
-npm install
-npm run dev
-```
-
-Abra `http://localhost:5173`. O frontend usa `http://127.0.0.1:8000` por padrão; ajuste `VITE_API_URL` em `frontend/.env` para usar uma API publicada.
-
-### 3. Qdrant local com Docker (opcional)
-
-```bash
-docker compose up --build
-```
-
-Nesse modo, configure `QDRANT_URL=http://qdrant:6333` para o container da API.
-
-## Endpoints principais
-
-| Método | Rota | Descrição |
-| --- | --- | --- |
-| `POST` | `/query` | Consulta a base RAG. |
-| `POST` | `/ingest` | Envia um arquivo PDF. |
-| `POST` | `/ingest/url` | Baixa e ingere um PDF público. |
-| `POST` | `/seed` | Processa PDFs existentes em `docs/`. |
-| `GET` | `/health` | Verifica a conectividade com o Qdrant. |
-| `GET` | `/stats` | Exibe métricas da coleção vetorial. |
 
 ## Testes
 
@@ -110,7 +59,3 @@ study_agent/
 ├── tests/               # Testes automatizados
 └── docker-compose.yml   # Ambiente local com Qdrant
 ```
-
-## Segurança
-
-As chaves ficam exclusivamente em `.env`, que não é versionado. Use `.env.example` como modelo e nunca publique credenciais no repositório.
