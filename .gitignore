@@ -1,0 +1,36 @@
+.env
+__pycache__/
+*.pyc
+docs/*.pdf
+venv/
+.agents/
+.pytest_cache/
+
+# Node.js
+node_modules/
+dist/
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+
+# Variáveis de ambiente e segredos
+.env
+.env.*
+!.env.example
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
