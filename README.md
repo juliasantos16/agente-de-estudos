@@ -1,4 +1,4 @@
-# Study Agent RAG
+# agente de estudos RAG
 
 Uma aplicação full-stack de estudos baseada em **Retrieval-Augmented Generation (RAG)**. Usuários podem enviar materiais em PDF, consultar uma base vetorial e receber respostas fundamentadas nos trechos recuperados, com as fontes utilizadas.
 
