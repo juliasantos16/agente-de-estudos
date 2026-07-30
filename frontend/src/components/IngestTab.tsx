@@ -174,7 +174,11 @@ export function IngestTab({ online }: Props) {
               <h3 className="font-semibold text-foreground">Ingestão concluída</h3>
             </div>
             <div className="grid sm:grid-cols-3 gap-3">
-              <Field label="Arquivo" value={result.filename} icon={<FileText className="h-3 w-3" />} />
+              <Field
+                label="Arquivo"
+                value={result.filename}
+                icon={<FileText className="h-3 w-3" />}
+              />
               <Field label="Chunks" value={result.total_chunks.toString()} />
               <Field label="Caracteres" value={result.total_characters.toLocaleString("pt-BR")} />
             </div>
@@ -208,7 +212,10 @@ export function IngestTab({ online }: Props) {
               <h3 className="text-xs font-bold tracking-widest text-primary mb-3">BASE VETORIAL</h3>
               <div className="grid sm:grid-cols-3 gap-3">
                 <Field label="Coleção" value={stats.collection} />
-                <Field label="Documentos vetorizados" value={stats.total_points.toLocaleString("pt-BR")} />
+                <Field
+                  label="Documentos vetorizados"
+                  value={stats.total_points.toLocaleString("pt-BR")}
+                />
                 <Field label="Status" value={stats.status} />
               </div>
             </motion.div>
@@ -219,15 +226,7 @@ export function IngestTab({ online }: Props) {
   );
 }
 
-function Field({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value: string;
-  icon?: React.ReactNode;
-}) {
+function Field({ label, value, icon }: { label: string; value: string; icon?: React.ReactNode }) {
   return (
     <div className="rounded-xl border border-[rgba(243,226,228,0.1)] p-3 bg-[rgba(52,45,99,0.25)]">
       <p className="text-[10px] uppercase tracking-widest text-muted-foreground flex items-center gap-1">

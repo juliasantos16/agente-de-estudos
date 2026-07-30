@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AlertCircle } from "lucide-react";
+
 import { AppHeader } from "@/components/AppHeader";
 import { QueryTab } from "@/components/QueryTab";
 import { IngestTab } from "@/components/IngestTab";
@@ -23,7 +24,8 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:description",
-        content: "Pergunte ao agente RAG e ingira PDFs ou URLs para expandir a base de conhecimento.",
+        content:
+          "Pergunte ao agente RAG e ingira PDFs ou URLs para expandir a base de conhecimento.",
       },
     ],
   }),
@@ -37,6 +39,7 @@ function Index() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [tab, setTab] = useState("query");
+
   const [preload, setPreload] = useState<{
     question: string;
     result: QueryResponse;
@@ -45,22 +48,30 @@ function Index() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setHistory(JSON.parse(raw));
-    } catch {}
+
+      if (raw) {
+        setHistory(JSON.parse(raw));
+      }
+    } catch (error) {
+      console.warn("Não foi possível carregar o histórico salvo:", error);
+    }
   }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
-    } catch {}
+    } catch (error) {
+      console.warn("Não foi possível salvar o histórico:", error);
+    }
   }, [history]);
 
   const handleAsk = (item: HistoryItem) => {
-    setHistory((h) => [item, ...h].slice(0, 50));
+    setHistory((currentHistory) => [item, ...currentHistory].slice(0, 50));
   };
 
   const handleSelect = (item: HistoryItem) => {
     setTab("query");
+
     setPreload({
       question: item.question,
       result: {
@@ -74,11 +85,7 @@ function Index() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <AppHeader
-        online={online}
-        setOnline={setOnline}
-        onOpenSidebar={() => setSidebarOpen(true)}
-      />
+      <AppHeader online={online} setOnline={setOnline} onOpenSidebar={() => setSidebarOpen(true)} />
 
       {online === false && (
         <div className="bg-destructive/15 border-b border-destructive/30 text-destructive text-sm px-4 py-2 text-center flex items-center justify-center gap-2">
@@ -105,6 +112,7 @@ function Index() {
               >
                 💬 Perguntar
               </TabsTrigger>
+
               <TabsTrigger
                 value="ingest"
                 className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
@@ -112,9 +120,11 @@ function Index() {
                 📄 Enviar Material
               </TabsTrigger>
             </TabsList>
+
             <TabsContent value="query" className="mt-6">
               <QueryTab online={online} onAskComplete={handleAsk} preload={preload} />
             </TabsContent>
+
             <TabsContent value="ingest" className="mt-6">
               <IngestTab online={online} />
             </TabsContent>

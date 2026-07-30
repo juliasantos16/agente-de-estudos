@@ -181,11 +181,7 @@ export function QueryTab({ online, onAskComplete, preload }: Props) {
                   {result.chunks_used} chunks utilizados
                 </Badge>
                 {result.sources.map((s) => (
-                  <Badge
-                    key={s}
-                    variant="outline"
-                    className="border-accent/40 text-foreground"
-                  >
+                  <Badge key={s} variant="outline" className="border-accent/40 text-foreground">
                     <FileText className="h-3 w-3 mr-1" />
                     {s}
                   </Badge>
@@ -245,9 +241,7 @@ export function QueryTab({ online, onAskComplete, preload }: Props) {
                               </span>
                             </div>
                             <Progress value={pct} className="h-1 mb-2" />
-                            <p className="text-xs text-muted-foreground line-clamp-4">
-                              {c.text}
-                            </p>
+                            <p className="text-xs text-muted-foreground line-clamp-4">{c.text}</p>
                           </div>
                         );
                       })}

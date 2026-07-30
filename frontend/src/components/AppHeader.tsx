@@ -21,7 +21,9 @@ export function AppHeader({ online, onOpenSidebar, setOnline }: Props) {
     const check = () =>
       api
         .health()
-        .then((r) => mountedFlag && setOnline(r.qdrant_connected && r.status === "ok" ? true : true))
+        .then(
+          (r) => mountedFlag && setOnline(r.qdrant_connected && r.status === "ok" ? true : true),
+        )
         .catch(() => mountedFlag && setOnline(false));
     check();
     const id = setInterval(check, 30000);

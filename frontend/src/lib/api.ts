@@ -57,9 +57,7 @@ export const api = {
   ingestFile: (file: File) => {
     const fd = new FormData();
     fd.append("file", file);
-    return fetch(`${BASE_URL}/ingest`, { method: "POST", body: fd }).then(
-      handle<IngestResponse>,
-    );
+    return fetch(`${BASE_URL}/ingest`, { method: "POST", body: fd }).then(handle<IngestResponse>);
   },
   ingestUrl: (url: string) =>
     fetch(`${BASE_URL}/ingest/url`, {

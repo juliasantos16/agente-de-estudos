@@ -51,9 +51,7 @@ function List({
           <div className="flex items-start gap-2">
             <MessageSquare className="h-4 w-4 text-primary shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium line-clamp-2 text-foreground">
-                {item.question}
-              </p>
+              <p className="text-sm font-medium line-clamp-2 text-foreground">{item.question}</p>
               <div className="flex items-center gap-1 mt-1 text-[10px] text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {new Date(item.timestamp).toLocaleString("pt-BR", {
@@ -106,7 +104,10 @@ export function HistorySidebar({ items, open, onOpenChange, onSelect, onClear }:
 
       {/* Mobile */}
       <Sheet open={open} onOpenChange={onOpenChange}>
-        <SheetContent side="left" className="p-0 w-80 bg-card border-r border-[rgba(243,226,228,0.1)]">
+        <SheetContent
+          side="left"
+          className="p-0 w-80 bg-card border-r border-[rgba(243,226,228,0.1)]"
+        >
           <SheetHeader className="px-4 py-3 border-b border-[rgba(243,226,228,0.1)]">
             <SheetTitle>Histórico ({items.length})</SheetTitle>
           </SheetHeader>
